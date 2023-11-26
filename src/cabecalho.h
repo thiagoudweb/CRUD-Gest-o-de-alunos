@@ -9,12 +9,13 @@ typedef struct
 // TAD ALUNO //
 typedef struct
 {
-    aluno *aluno;
     int idRegistro;
-
+    aluno *aluno;
+    
 } cadAluno;
 
 // ASSINATURA DE FUNÇÕES: FUNÇÕES DO MAIN.
+void menu();
 
 // ASSINATURA DE FUNÇÕES: ALOCAÇÃO NA MEMÓRIA HEAP - DINÂMICA - //
 aluno *returnEndHeapAluno();

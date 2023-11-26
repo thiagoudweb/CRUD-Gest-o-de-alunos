@@ -36,8 +36,10 @@ int main()
         scanf("%d", &cadastroAluno.aluno->matricula);
         printf("Digite as faltas do aluno:");
         scanf("%d", &cadastroAluno.aluno->faltas);
+        
+        
 
-        inserirInicio(&vetGeral, cadastroAluno);
+        inserirInicio(vetGeral, cadastroAluno);
 
         break;
 
@@ -51,7 +53,7 @@ int main()
 
     default:
         puts("Digite escolha valida!\n");
-        // menu();
+        
     }
 
     return 0;
