@@ -10,8 +10,8 @@ void menu()
 
     cadAluno cadastroAluno;
     cadAluno *vetGeral = vetEndHeapAlunos();
-
-    while (1)
+    int bool = 1;
+    while (bool == 1)
     {
 
         puts("----------------- CADASTRAR ALUNO ----------------");
@@ -57,7 +57,7 @@ void menu()
 
             case 8:
                 puts("Saindo!.......\n");
-                break;
+                bool = 0;
 
                 ;
             }
