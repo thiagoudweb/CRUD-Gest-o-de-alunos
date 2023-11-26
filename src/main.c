@@ -19,7 +19,7 @@ int main()
     puts("[8] - Deseja Sair?");
 
     int escolha;
-    scanf("\n%d", &escolha);
+    scanf("%d", &escolha);
 
     switch (escolha)
     {
@@ -37,7 +37,8 @@ int main()
         printf("Digite as faltas do aluno:");
         scanf("%d", &cadastroAluno.aluno->faltas);
 
-        inserirInicio(&vetGeral, cadastroAluno);
+        inserirInicio(vetGeral, cadastroAluno);
+        ;
 
         break;
 

@@ -1,30 +1,22 @@
 #include "cabecalho.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 
 // FUNÇÕES DO MENU //
 
-// FUNÇÃO INSERIR NO INICIO // 
-void funcMainInserirInicio(){
-
-
-
+// FUNÇÃO INSERIR NO INICIO //
+void funcMainInserirInicio()
+{
 }
 // FUNÇÃO INSERIR NO FIM //
-void funcMainInserirFim(){
-
-
-    
+void funcMainInserirFim()
+{
 }
 // FUNÇÃO INSERIR EM UM LOCAL ESPECIFICO //
-void funcMainInserirPosEspec(){
-
-
-    
+void funcMainInserirPosEspec()
+{
 }
-
-
 
 // Função para reservar o vetor generalizado dos alunos //
 cadAluno *vetEndHeapAlunos()
@@ -41,12 +33,11 @@ aluno *returnEndHeapAluno()
     return heapAluno;
 }
 
+
 // Função inserir aluno //
 int inserirInicio(cadAluno *cadastroAluno, cadAluno registro)
 {
-
-
-
+    memcpy(cadastroAluno, &registro, sizeof(cadAluno));
 
     return 0;
 }
