@@ -65,20 +65,6 @@ void menu()
     }
 }
 
-//----------- FUNÇÕES PARA INSERIR ALUNOS ---------//
-
-// -- Inserir registro no inicio //
-void funcMainInserirInicio()
-{
-}
-// -- Inserir registro no fim //
-void funcMainInserirFim()
-{
-}
-// -- inserir em local especifico //
-void funcMainInserirPosEspec()
-{
-}
 
 //----------- FUNÇÕES DE ALOCAÇÃO ---------//
 
