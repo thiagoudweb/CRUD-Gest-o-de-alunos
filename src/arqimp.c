@@ -27,33 +27,40 @@ void menu()
         int escolha;
         scanf("%d", &escolha);
 
-        switch (escolha)
+        if (escolha < 1 || escolha > 8)
         {
-        case 1:
+            puts("Escolha uma opção válida!");
+            continue;
+        }
+        else
+        {
+            switch (escolha)
+            {
+            case 1:
 
-            printf("Iinsira o ID de registro do aluno:");
-            scanf("%d", &cadastroAluno.idRegistro);
-            cadastroAluno.aluno = returnEndHeapAluno(&cadastroAluno.aluno);
-            printf("Digite o nome do  aluno:");
-            scanf("%s", &cadastroAluno.aluno->nomeAluno);
-            printf("Digite a nota do aluno:");
-            scanf("%d", &cadastroAluno.aluno->notas);
-            printf("Digite a matricula do aluno:");
-            scanf("%d", &cadastroAluno.aluno->matricula);
-            printf("Digite as faltas do aluno:");
-            scanf("%d", &cadastroAluno.aluno->faltas);
-            //                 ESCREVENDO DADOS NA HEAP                 //
-            inserirInicio(vetGeral, cadastroAluno);
+                printf("Iinsira o ID de registro do aluno:");
+                scanf("%d", &cadastroAluno.idRegistro);
+                cadastroAluno.aluno = returnEndHeapAluno(&cadastroAluno.aluno);
+                printf("Digite o nome do  aluno:");
+                scanf("%s", &cadastroAluno.aluno->nomeAluno);
+                printf("Digite a nota do aluno:");
+                scanf("%d", &cadastroAluno.aluno->notas);
+                printf("Digite a matricula do aluno:");
+                scanf("%d", &cadastroAluno.aluno->matricula);
+                printf("Digite as faltas do aluno:");
+                scanf("%d", &cadastroAluno.aluno->faltas);
+                //                 ESCREVENDO DADOS NA HEAP                 //
+                inserirInicio(vetGeral, cadastroAluno);
 
-        case 2:
-            //////////////
+            case 2:
+                //////////////
 
-        case 8:
-            puts("Saindo!.......\n");
-            break;
+            case 8:
+                puts("Saindo!.......\n");
+                break;
 
-        default:
-            puts("Digite escolha valida!\n");
+                ;
+            }
         }
     }
 }
