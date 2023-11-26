@@ -5,7 +5,7 @@
 
 int main()
 {
-    void menu();
+    menu();
 
     return 0;
 }
