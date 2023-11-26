@@ -3,29 +3,30 @@
 #include <stdlib.h>
 #include <string.h>
 
-// FUNÇÕES DO MENU //
+//----------- FUNÇÕES DO MAIN ---------//
 
-// FUNÇÃO INSERIR NO INICIO //
+// -- Inserir registro no inicio //
 void funcMainInserirInicio()
 {
 }
-// FUNÇÃO INSERIR NO FIM //
+// -- Inserir registro no fim //
 void funcMainInserirFim()
 {
 }
-// FUNÇÃO INSERIR EM UM LOCAL ESPECIFICO //
+// -- inserir em local especifico //
 void funcMainInserirPosEspec()
 {
 }
 
-// Função para reservar o vetor generalizado dos alunos //
+//----------- FUNÇÕES DE ALOCAÇÃO ---------//
+
+// -- Alocação de memória para 10 registros iniciais --
 cadAluno *vetEndHeapAlunos()
 {
     cadAluno *vetEndAluno = malloc(10 * sizeof(cadAluno));
     return vetEndAluno;
 }
-
-// Função para reservar o espaço do atributo na heap //
+// -- Alocando espaço para o membro >Aluno< na struct CadAluno --
 
 aluno *returnEndHeapAluno()
 {
@@ -33,8 +34,8 @@ aluno *returnEndHeapAluno()
     return heapAluno;
 }
 
+//----------- FUNÇÕES PARA INSERÇÃO DE DADOS ---------//
 
-// Função inserir aluno //
 int inserirInicio(cadAluno *cadastroAluno, cadAluno registro)
 {
     memcpy(cadastroAluno, &registro, sizeof(cadAluno));
