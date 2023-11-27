@@ -4,7 +4,8 @@
 #include <string.h>
 
 //----------- FUNÇÃO MAIN ---------//
-
+int tamInicial = 10;
+int tamAtualVet = 0;
 void menu()
 {
     cadAluno *vetGeral;
@@ -51,7 +52,7 @@ void menu()
                 printf("Digite as faltas do aluno:");
                 scanf("%d", &cadastroAluno.aluno->faltas);
                 //                 ESCREVENDO DADOS NA HEAP                 //
-                inserirInicio(vetGeral, cadastroAluno);
+                inserirInicio(&vetGeral, cadastroAluno);
 
             case 2:
                 //////////////
@@ -59,8 +60,6 @@ void menu()
             case 8:
                 puts("Saindo!.......\n");
                 bool = 0;
-
-                ;
             }
         }
     }
@@ -94,27 +93,37 @@ void vetEndHeapAlunos(void **vetGeral)
 }
 // -- Alocando espaço para o membro >Aluno< na struct CadAluno --
 
-void returnEndHeapAluno( void **vetAlunos)
+void returnEndHeapAluno(void **vetAlunos)
 {
-    void *endTemp = calloc(1,sizeof(aluno));
+    void *endTemp = calloc(1, sizeof(aluno));
     if (endTemp == NULL)
     {
         printf("A alocação de alunos falho!");
     }
-    else{
-
+    else
+    {
         *vetAlunos = endTemp;
     }
-    
-
-
 }
 
 //----------- FUNÇÕES PARA INSERÇÃO DE DADOS NO VETOR DE ALUNOS ---------//
 
-int inserirInicio(cadAluno *cadastroAluno, cadAluno registro)
+int inserirInicio(cadAluno **cadastroAluno, cadAluno registro)
 {
-    memcpy(cadastroAluno, &registro, sizeof(cadAluno));
+    // verificando se o tamanho atual é igual ao do vetor //
+    if (tamAtualVet == tamInicial)
+    {
+        void *endTem = (cadastroAluno, tamInicial * sizeof(cadAluno));
+        if (endTem == NULL)
+        {
+            printf("Espaço de memória insuficiente.");
+        }
+        else
+        {
+
+            *cadastroAluno = endTem;
+        }
+    }
 
     return 0;
 }
