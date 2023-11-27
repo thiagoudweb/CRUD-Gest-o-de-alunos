@@ -113,7 +113,7 @@ int inserirInicio(cadAluno **cadastroAluno, cadAluno registro)
     // verificando se o tamanho atual é igual ao do vetor //
     if (tamAtualVet == tamInicial)
     {
-        void *endTem = realloc (cadastroAluno, tamInicial * sizeof(cadAluno));
+        void *endTem = realloc (*cadastroAluno, tamInicial * sizeof(cadAluno));
         if (endTem == NULL)
         {
             printf("Espaço de memória insuficiente.");
