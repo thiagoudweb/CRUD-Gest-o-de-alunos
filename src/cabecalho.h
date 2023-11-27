@@ -18,10 +18,10 @@ typedef struct
 void menu();
 
 // ASSINATURA DE FUNÇÕES: ALOCAÇÃO NA MEMÓRIA HEAP - DINÂMICA - //
-aluno *returnEndHeapAluno();
-cadAluno *vetEndHeapAlunos();
+void returnEndHeapAluno( void **aluno);
+void vetEndHeapAlunos(void **vetGeral);
 
 // ASSINATURA DE FUNÇÕES: INSERÇÃO DE REGISTRO NAS POSIÇÕES ESCOLHIDAS PELO USUÁRIO //
-int inserirInicio(cadAluno *cadastroAluno, cadAluno registro);
+int inserirInicio(cadAluno **cadastroAluno, cadAluno registro);
 int inserirFim(cadAluno *cadastroAluno, cadAluno registro);
 int inserirPosiInformada (cadAluno *cadastroAluno, cadAluno registro, int posicao);

@@ -7,9 +7,10 @@
 
 void menu()
 {
-
+    cadAluno *vetGeral;
+    vetEndHeapAlunos(&vetGeral);
     cadAluno cadastroAluno;
-    cadAluno *vetGeral = vetEndHeapAlunos();
+
     int bool = 1;
     while (bool == 1)
     {
@@ -40,7 +41,7 @@ void menu()
 
                 printf("Iinsira o ID de registro do aluno:");
                 scanf("%d", &cadastroAluno.idRegistro);
-                cadastroAluno.aluno = returnEndHeapAluno(&cadastroAluno.aluno);
+                returnEndHeapAluno(&cadastroAluno.aluno);
                 printf("Digite o nome do  aluno:");
                 scanf("%s", &cadastroAluno.aluno->nomeAluno);
                 printf("Digite a nota do aluno:");
@@ -65,21 +66,48 @@ void menu()
     }
 }
 
-
 //----------- FUNÇÕES DE ALOCAÇÃO ---------//
 
-// -- Alocação de memória para 10 registros iniciais --
-cadAluno *vetEndHeapAlunos()
+// -- Alocação de memória para 10 registros iniciais ( FUNÇÃO DE ALOCAÇÃO GENÉRICA > Tipagem na variavel do menu de atribuição) --
+void vetEndHeapAlunos(void **vetGeral)
 {
-    cadAluno *vetEndAluno = malloc(10 * sizeof(cadAluno));
-    return vetEndAluno;
+    // verificando se o espaço de vetGeral na stack foi alocado com sucesso
+    if (vetGeral == NULL)
+    {
+        printf("O ponteiro vetGeral é inválido.\n");
+    }
+
+    else
+    {
+        // alocando espaço na heap e atribuindo a *vetGeral no menu > tipagem integrada no *vetGeral no menu.
+        void *endTemp = calloc(10, sizeof(cadAluno));
+
+        if (endTemp == NULL)
+        {
+            printf("Falha ao alocar a memória! Espaço insuficiente");
+        }
+        else
+        {
+            *vetGeral = endTemp;
+        }
+    }
 }
 // -- Alocando espaço para o membro >Aluno< na struct CadAluno --
 
-aluno *returnEndHeapAluno()
+void returnEndHeapAluno( void **vetAlunos)
 {
-    aluno *heapAluno = malloc(sizeof(aluno));
-    return heapAluno;
+    void *endTemp = calloc(1,sizeof(aluno));
+    if (endTemp == NULL)
+    {
+        printf("A alocação de alunos falho!");
+    }
+    else{
+
+        *vetAlunos = endTemp;
+    }
+    
+
+
 }
 
 //----------- FUNÇÕES PARA INSERÇÃO DE DADOS NO VETOR DE ALUNOS ---------//
