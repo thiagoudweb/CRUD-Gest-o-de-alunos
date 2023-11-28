@@ -5,6 +5,7 @@
 
 //----------- FUNÇÃO MAIN ---------//
 int tamInicial = 10;
+int tamFixo = 10;
 int tamAtualVet = 0;
 void menu()
 {
@@ -18,7 +19,7 @@ void menu()
 
         puts("----------------- CADASTRAR ALUNO ----------------");
         puts("[1] - Inserir Aluno no Inicio");
-        puts("[2] - Cadastrar Aluno");
+        puts("[2] - Inserir Aluno no fim");
         puts("[3] - Cadastrar Aluno");
         puts("[4] - Cadastrar Aluno");
         puts("[5] - Cadastrar Aluno");
@@ -64,7 +65,29 @@ void menu()
                 continue;
 
             case 2:
-                //////////////
+
+                printf("Iinsira o ID de registro do aluno:");
+                scanf("%d", &cadastroAluno.idRegistro);
+                returnEndHeapAluno(&cadastroAluno.aluno);
+                printf("Digite o nome do  aluno:");
+                scanf("%s", &cadastroAluno.aluno->nomeAluno);
+                printf("Digite 7 notas do aluno:");
+                for (int i = 0; i < 7; i++)
+                {
+                    scanf("%d", &cadastroAluno.aluno->notas[i]);
+                }
+
+                printf("Digite a matricula do aluno:");
+                scanf("%d", &cadastroAluno.aluno->matricula);
+                printf("Digite as 7 faltas do aluno:");
+                for (int i = 0; i < 7; i++)
+                {
+                    scanf("%d", &cadastroAluno.aluno->faltas[i]);
+                }
+
+                //                 ESCREVENDO DADOS NA HEAP                 //
+                inserirFim(&vetGeral, cadastroAluno);
+                continue;
 
             case 8:
                 puts("Saindo!.......\n");
@@ -115,7 +138,9 @@ void returnEndHeapAluno(void **vetAlunos)
     }
 }
 
-// inserindo aluno inicio //
+// ------- FUNÇÕES PARA INSERIR ALUNOS ------------ //
+
+// -----        inserir no inicio ------- //
 int inserirInicio(cadAluno **cadastroAluno, cadAluno registro)
 {
     // verificando se o tamanho atual é igual ao do vetor //
@@ -133,11 +158,29 @@ int inserirInicio(cadAluno **cadastroAluno, cadAluno registro)
     return 0;
 }
 
+// -----        inserir no fim ------- //
+int inserirFim(cadAluno **cadastroAluno, cadAluno registro)
+{
+
+    if (tamAtualVet == tamInicial)
+    {
+        aumentarMemoria(cadastroAluno);
+        moverFimEinserir(cadastroAluno, registro);
+    }
+
+    else
+    {
+        moverFimEinserir(cadastroAluno, registro);
+    }
+
+    return 0;
+}
+
 //  FUNÇÃO PARA AUMENTAR MEMÓRIA //
 void aumentarMemoria(cadAluno **cadastroAluno)
 {
 
-    void *endTem = realloc(*cadastroAluno, tamInicial * sizeof(cadAluno));
+    void *endTem = realloc(*cadastroAluno, tamFixo * sizeof(cadAluno));
     if (endTem == NULL)
     {
         printf("Espaço de memória insuficiente.");
@@ -145,30 +188,73 @@ void aumentarMemoria(cadAluno **cadastroAluno)
     else
     {
         *cadastroAluno = endTem;
+        tamInicial += 10;
     }
 }
 
 // FUNÇÃO PARA MOVER MOVER OS DADOS PARA A DIREITA
 
+// ---- mover direita inicio  //
 int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
 {
 
     cadAluno *endComp = *cadastroAluno;
     if ((endComp + 0)->idRegistro == 0)
     {
-        endComp->idRegistro = registro.idRegistro;
-        endComp->aluno = registro.aluno;
+
+        (endComp + 0)->idRegistro = registro.idRegistro;
+        (endComp + 0)->aluno = registro.aluno;
+        printf("Cadastro realizado com sucesso!");
         tamAtualVet++;
         return 1;
-        }
+    }
     else
     {
-        cadAluno *temp = memmove(*cadastroAluno + 1, *cadastroAluno, tamAtualVet * sizeof(cadAluno));
-        
-        // (temp + 0)->idRegistro = registro.idRegistro;
-        // (temp + 0)->aluno = registro.idRegistro;
+
+        memmove(endComp + 1, endComp, tamAtualVet * sizeof(cadAluno));
+
+        (endComp + 0)->idRegistro = registro.idRegistro;
+        (endComp + 0)->aluno = registro.aluno;
+        printf("Cadastro realizado com sucesso!");
         return 1;
     }
 
     tamAtualVet++;
 }
+
+// FUNÇÃO PARA INSERIR NO FIM //
+
+int moverFimEinserir(cadAluno **cadastroAluno, cadAluno registro)
+{
+    int escolhaUser;
+    cadAluno *endComp = *cadastroAluno;
+    if (tamAtualVet == 0)
+    {
+        printf("Você ainda não possui registros. Deseja alocar no inicio?");
+        printf("Digite 1 para sim ou 2 para não");
+        scanf("%d", &escolhaUser);
+        if (escolhaUser == 2)
+        {
+            printf("Você optou por sair.");
+            return 0;
+        }
+        else
+        {
+            (endComp + 0)->idRegistro = registro.idRegistro;
+            (endComp + 0)->aluno = registro.aluno;
+            printf("Cadastro realizado com sucesso!");
+            tamAtualVet++;
+            return 1;
+        }
+    }
+    else
+    {
+        (endComp + (tamAtualVet + 1))->idRegistro = registro.idRegistro;
+        (endComp + (tamAtualVet + 1))->aluno = registro.aluno;
+        printf("Cadastro realizado com sucesso!");
+        tamAtualVet++;
+        return 1;
+    }
+}
+
+// IMPLEMENTAÇÃO DE ESCOLHAS DO USUÁRIO //

@@ -22,9 +22,11 @@ void returnEndHeapAluno( void **vetAlunos);
 void vetEndHeapAlunos(void **vetGeral);
 void aumentarMemoria(cadAluno **cadastroAluno);
 int moverDireitaEinserir ( cadAluno **cadastroAluno, cadAluno registro);
+int moverFimEinserir ( cadAluno **cadastroAluno, cadAluno registro);
+
 
 
 // ASSINATURA DE FUNÇÕES: INSERÇÃO DE REGISTRO NAS POSIÇÕES ESCOLHIDAS PELO USUÁRIO //
 int inserirInicio(cadAluno **cadastroAluno, cadAluno registro);
-int inserirFim(cadAluno *cadastroAluno, cadAluno registro);
+int inserirFim(cadAluno **cadastroAluno, cadAluno registro);
 int inserirPosiInformada (cadAluno *cadastroAluno, cadAluno registro, int posicao);
