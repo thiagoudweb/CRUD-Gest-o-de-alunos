@@ -45,12 +45,20 @@ void menu()
                 returnEndHeapAluno(&cadastroAluno.aluno);
                 printf("Digite o nome do  aluno:");
                 scanf("%s", &cadastroAluno.aluno->nomeAluno);
-                printf("Digite a nota do aluno:");
-                scanf("%d", &cadastroAluno.aluno->notas);
+                printf("Digite 7 notas do aluno:");
+                for (int i = 0; i < 7; i++)
+                {
+                    scanf("%d", &cadastroAluno.aluno->notas[i]);
+                }
+
                 printf("Digite a matricula do aluno:");
                 scanf("%d", &cadastroAluno.aluno->matricula);
-                printf("Digite as faltas do aluno:");
-                scanf("%d", &cadastroAluno.aluno->faltas);
+                printf("Digite as 7 faltas do aluno:");
+                for (int i = 0; i < 7; i++)
+                {
+                    scanf("%d", &cadastroAluno.aluno->faltas[i]);
+                }
+
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirInicio(&vetGeral, cadastroAluno);
                 continue;
@@ -150,15 +158,17 @@ int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
     {
         endComp->idRegistro = registro.idRegistro;
         endComp->aluno = registro.idRegistro;
+        tamAtualVet++;
         return 1;
+        
     }
     else
     {
-        void *temp = memmove(*cadastroAluno + 1, *cadastroAluno, tamAtualVet * sizeof(cadAluno));
-        (endComp + 0)->idRegistro = registro.idRegistro;
-        (endComp + 0)->aluno = registro.idRegistro;
+        cadAluno *temp = memmove(*cadastroAluno + 1, *cadastroAluno, tamAtualVet * sizeof(cadAluno));
+        (temp + 0)->idRegistro = registro.idRegistro;
+        (temp + 0)->aluno = registro.idRegistro;
         return 1;
-        }
+    }
 
     tamAtualVet++;
 }
