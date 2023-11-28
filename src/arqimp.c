@@ -20,7 +20,7 @@ void menu()
         puts("----------------- CADASTRAR ALUNO ----------------");
         puts("[1] - Inserir Aluno no Inicio");
         puts("[2] - Inserir Aluno no fim");
-        puts("[3] - Cadastrar Aluno");
+        puts("[3] - Inserir em um local especifico");
         puts("[4] - Cadastrar Aluno");
         puts("[5] - Cadastrar Aluno");
         puts("[6] - Cadastrar Aluno");
@@ -88,6 +88,30 @@ void menu()
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirFim(&vetGeral, cadastroAluno);
                 continue;
+               
+                printf("Iinsira o ID de registro do aluno:");
+                scanf("%d", &cadastroAluno.idRegistro);
+                returnEndHeapAluno(&cadastroAluno.aluno);
+                printf("Digite o nome do  aluno:");
+                scanf("%s", &cadastroAluno.aluno->nomeAluno);
+                printf("Digite 7 notas do aluno:");
+                for (int i = 0; i < 7; i++)
+                {
+                    scanf("%d", &cadastroAluno.aluno->notas[i]);
+                }
+
+                printf("Digite a matricula do aluno:");
+                scanf("%d", &cadastroAluno.aluno->matricula);
+                printf("Digite as 7 faltas do aluno:");
+                for (int i = 0; i < 7; i++)
+                {
+                    scanf("%d", &cadastroAluno.aluno->faltas[i]);
+                }
+
+                //                 ESCREVENDO DADOS NA HEAP                 //
+                inserirFim(&vetGeral, cadastroAluno);
+
+                case 3:
 
             case 8:
                 puts("Saindo!.......\n");
@@ -258,3 +282,4 @@ int moverFimEinserir(cadAluno **cadastroAluno, cadAluno registro)
 }
 
 // IMPLEMENTAÇÃO DE ESCOLHAS DO USUÁRIO //
+
