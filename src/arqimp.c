@@ -157,16 +157,16 @@ int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
     if ((endComp + 0)->idRegistro == 0)
     {
         endComp->idRegistro = registro.idRegistro;
-        endComp->aluno = registro.idRegistro;
+        endComp->aluno = registro.aluno;
         tamAtualVet++;
         return 1;
-        
-    }
+        }
     else
     {
         cadAluno *temp = memmove(*cadastroAluno + 1, *cadastroAluno, tamAtualVet * sizeof(cadAluno));
-        (temp + 0)->idRegistro = registro.idRegistro;
-        (temp + 0)->aluno = registro.idRegistro;
+        
+        // (temp + 0)->idRegistro = registro.idRegistro;
+        // (temp + 0)->aluno = registro.idRegistro;
         return 1;
     }
 
