@@ -53,6 +53,7 @@ void menu()
                 scanf("%d", &cadastroAluno.aluno->faltas);
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirInicio(&vetGeral, cadastroAluno);
+                continue;
 
             case 2:
                 //////////////
@@ -106,30 +107,58 @@ void returnEndHeapAluno(void **vetAlunos)
     }
 }
 
-//----------- FUNÇÕES PARA INSERÇÃO DE DADOS NO VETOR DE ALUNOS ---------//
-
+// inserindo aluno inicio //
 int inserirInicio(cadAluno **cadastroAluno, cadAluno registro)
 {
     // verificando se o tamanho atual é igual ao do vetor //
     if (tamAtualVet == tamInicial)
     {
-        void *endTem = realloc (*cadastroAluno, tamInicial * sizeof(cadAluno));
-        if (endTem == NULL)
-        {
-            printf("Espaço de memória insuficiente.");
-        }
-        else
-        {
-
-            *cadastroAluno = endTem;
-        }
+        aumentarMemoria(cadastroAluno);
+        moverDireitaEinserir(cadastroAluno, registro);
     }
-    
-    // else if (/* condition */)
-    // {
-    //     /* code */
-    // }
-    
+
+    else
+    {
+        moverDireitaEinserir(cadastroAluno, registro);
+    }
 
     return 0;
+}
+
+//  FUNÇÃO PARA AUMENTAR MEMÓRIA //
+void aumentarMemoria(cadAluno **cadastroAluno)
+{
+
+    void *endTem = realloc(*cadastroAluno, tamInicial * sizeof(cadAluno));
+    if (endTem == NULL)
+    {
+        printf("Espaço de memória insuficiente.");
+    }
+    else
+    {
+        *cadastroAluno = endTem;
+    }
+}
+
+// FUNÇÃO PARA MOVER MOVER OS DADOS PARA A DIREITA
+
+int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
+{
+
+    cadAluno *endComp = *cadastroAluno;
+    if ((endComp + 0)->idRegistro == 0)
+    {
+        endComp->idRegistro = registro.idRegistro;
+        endComp->aluno = registro.idRegistro;
+        return 1;
+    }
+    else
+    {
+        void *temp = memmove(*cadastroAluno + 1, *cadastroAluno, tamAtualVet * sizeof(cadAluno));
+        (endComp + 0)->idRegistro = registro.idRegistro;
+        (endComp + 0)->aluno = registro.idRegistro;
+        return 1;
+        }
+
+    tamAtualVet++;
 }
