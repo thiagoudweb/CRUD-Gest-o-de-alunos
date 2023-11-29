@@ -230,12 +230,20 @@ int inserirPosiInformada(cadAluno **cadastroAluno, cadAluno registro, int posica
         moverLugarEscolhido(cadastroAluno, registro, posicao);
     }
 }
-// ----- inserir em um local especifico  ------ //
+// ----- Deleltar posição  ------ //
 
 int deletarPosicoes(cadAluno **cadastroAluno, int posicao)
 {
 
     removerPosicao(cadastroAluno, posicao);
+}
+
+// ----- deletar registro, mas mantendo o espaço ---- //
+
+int apagarRegistro(cadAluno **cadastroAluno, int posicao)
+{
+
+    removerRegistro(posicao, cadastroAluno);
 }
 
 //  FUNÇÃO PARA AUMENTAR MEMÓRIA //
@@ -361,4 +369,29 @@ int removerPosicao(int posicao, cadAluno **cadastroAluno)
         tamAtualVet--;
         return 1;
     }
+}
+
+// remover aluno por id ( identificador inicial do bloco do vetor ) //
+int removerRegistro(int id, cadAluno **cadastroAluno)
+{
+    cadAluno *varTemp = *cadastroAluno;
+
+    for (int i = 0; i < tamAtualVet; i++)
+    {
+        if ((varTemp + i)->idRegistro == id)
+        {
+            for (int j = i; j < tamAtualVet - 1; j++)
+            {
+                (varTemp + j)->idRegistro = (varTemp + j + 1)->idRegistro;
+                (varTemp + j)->aluno = (varTemp + j + 1)->aluno;
+            }
+            (varTemp + tamAtualVet - 1)->idRegistro = 0;
+            free((varTemp + tamAtualVet - 1)->aluno);
+            (varTemp + tamAtualVet - 1)->aluno = NULL;
+            tamAtualVet--;
+            return 1;
+        }
+    }
+
+    return 0;
 }
