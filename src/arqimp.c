@@ -339,7 +339,7 @@ int moverLugarEscolhido(cadAluno **cadastroAluno, cadAluno registro, int posicao
         (varTemp + posicao)->idRegistro = registro.idRegistro;
         (varTemp + posicao)->aluno = registro.aluno;
 
-        salvarDados(endComp, "a");
+        salvarDados(varTemp, "a");
 
         printf("Cadastro realizado com sucesso!");
 
@@ -353,7 +353,7 @@ int moverLugarEscolhido(cadAluno **cadastroAluno, cadAluno registro, int posicao
         (varTemp + posicao)->idRegistro = registro.idRegistro;
         (varTemp + posicao)->aluno = registro.aluno;
 
-        salvarDados(endComp, "a");
+        salvarDados(varTemp, "a");
 
         printf("Cadastro realizado com sucesso!\n");
 
