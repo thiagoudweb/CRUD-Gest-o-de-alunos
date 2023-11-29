@@ -10,6 +10,7 @@ typedef struct
 typedef struct
 {
     int idRegistro;
+    int isVazio;
     aluno *aluno;
     
 } cadAluno;

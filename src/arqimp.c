@@ -20,6 +20,8 @@ void menu()
 
     while (1)
     {
+        lerDados(vetGeral);
+        
         puts("----------------- CADASTRAR ALUNO ----------------");
         puts("[1] - Inserir Aluno no Inicio");
         puts("[2] - Inserir Aluno no fim");
@@ -74,6 +76,7 @@ void menu()
 
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirInicio(&vetGeral, cadastroAluno);
+                vetGeral->isVazio = 0;
                 break;
 
             case 2:
@@ -102,6 +105,7 @@ void menu()
 
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirFim(&vetGeral, cadastroAluno);
+                vetGeral->isVazio = 0;
                 break;
 
             case 3:
@@ -134,6 +138,7 @@ void menu()
 
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirPosiInformada(&vetGeral, cadastroAluno, escolhaUsuario);
+                vetGeral->isVazio = 0;
                 break;
             }
         }
@@ -250,6 +255,7 @@ void aumentarMemoria(cadAluno **cadastroAluno)
 int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
 {
     cadAluno *endComp = *cadastroAluno;
+
     if ((endComp + 0)->idRegistro == 0)
     {
 
