@@ -20,7 +20,7 @@ void menu()
         puts("----------------- CADASTRAR ALUNO ----------------");
         puts("[1] - Inserir Aluno no Inicio");
         puts("[2] - Inserir Aluno no fim");
-        puts("[3] - Inserir em um local especifico");
+        puts("[3] - Cadastrar Aluno");
         puts("[4] - Cadastrar Aluno");
         puts("[5] - Cadastrar Aluno");
         puts("[6] - Cadastrar Aluno");
@@ -88,30 +88,6 @@ void menu()
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirFim(&vetGeral, cadastroAluno);
                 continue;
-               
-                printf("Iinsira o ID de registro do aluno:");
-                scanf("%d", &cadastroAluno.idRegistro);
-                returnEndHeapAluno(&cadastroAluno.aluno);
-                printf("Digite o nome do  aluno:");
-                scanf("%s", &cadastroAluno.aluno->nomeAluno);
-                printf("Digite 7 notas do aluno:");
-                for (int i = 0; i < 7; i++)
-                {
-                    scanf("%d", &cadastroAluno.aluno->notas[i]);
-                }
-
-                printf("Digite a matricula do aluno:");
-                scanf("%d", &cadastroAluno.aluno->matricula);
-                printf("Digite as 7 faltas do aluno:");
-                for (int i = 0; i < 7; i++)
-                {
-                    scanf("%d", &cadastroAluno.aluno->faltas[i]);
-                }
-
-                //                 ESCREVENDO DADOS NA HEAP                 //
-                inserirFim(&vetGeral, cadastroAluno);
-
-                case 3:
 
             case 8:
                 puts("Saindo!.......\n");
@@ -124,7 +100,7 @@ void menu()
 //----------- FUNÇÕES DE ALOCAÇÃO ---------//
 
 // -- Alocação de memória para 10 registros iniciais ( FUNÇÃO DE ALOCAÇÃO GENÉRICA > Tipagem na variavel do menu de atribuição) --
-void vetEndHeapAlunos(void **vetGeral)
+void vetEndHeapAlunos(cadAluno **vetGeral)
 {
     // verificando se o espaço de vetGeral na stack foi alocado com sucesso
     if (vetGeral == NULL)
@@ -149,7 +125,7 @@ void vetEndHeapAlunos(void **vetGeral)
 }
 // -- Alocando espaço para o membro >Aluno< na struct CadAluno --
 
-void returnEndHeapAluno(void **vetAlunos)
+void returnEndHeapAluno(aluno **vetAlunos)
 {
     void *endTemp = calloc(1, sizeof(aluno));
     if (endTemp == NULL)
@@ -216,7 +192,7 @@ void aumentarMemoria(cadAluno **cadastroAluno)
     }
 }
 
-// FUNÇÃO PARA MOVER MOVER OS DADOS PARA A DIREITA
+// FUNÇÃO PARA  MOVER OS DADOS PARA A DIREITA
 
 // ---- mover direita inicio  //
 int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
@@ -240,10 +216,9 @@ int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
         (endComp + 0)->idRegistro = registro.idRegistro;
         (endComp + 0)->aluno = registro.aluno;
         printf("Cadastro realizado com sucesso!");
+        tamAtualVet++;
         return 1;
     }
-
-    tamAtualVet++;
 }
 
 // FUNÇÃO PARA INSERIR NO FIM //
@@ -282,4 +257,3 @@ int moverFimEinserir(cadAluno **cadastroAluno, cadAluno registro)
 }
 
 // IMPLEMENTAÇÃO DE ESCOLHAS DO USUÁRIO //
-
