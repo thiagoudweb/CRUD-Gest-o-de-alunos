@@ -134,6 +134,7 @@ void menu()
                 printf("Insirida um numero identificador");
                 scanf("%d", &escolhaUsuario);
                 apagarRegistro(&vetGeral, escolhaUsuario);
+                continue;
 
             case 8:
                 puts("Saindo!.......\n");
@@ -392,6 +393,7 @@ int removerRegistro(int id, cadAluno **cadastroAluno)
             (varTemp + tamAtualVet - 1)->idRegistro = 0;
             free((varTemp + tamAtualVet - 1)->aluno);
             (varTemp + tamAtualVet - 1)->aluno = NULL;
+            printf("Registro removido com sucesso!");
             tamAtualVet--;
             return 1;
         }
