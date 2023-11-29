@@ -217,6 +217,13 @@ int inserirPosiInformada(cadAluno **cadastroAluno, cadAluno registro, int posica
         moverLugarEscolhido(cadastroAluno, registro, posicao);
     }
 }
+// ----- inserir em um local especifico  ------ //
+
+int deletarPosicoes(cadAluno **cadastroAluno, int posicao)
+{
+
+    removerPosicao(cadastroAluno, posicao);
+}
 
 //  FUNÇÃO PARA AUMENTAR MEMÓRIA //
 void aumentarMemoria(cadAluno **cadastroAluno)
@@ -323,11 +330,22 @@ int moverLugarEscolhido(cadAluno **cadastroAluno, cadAluno registro, int posicao
         return 1;
     }
 }
+// remover de um lugar especifico //
+int removerPosicao(int posicao, cadAluno **cadastroAluno)
+{
+    cadAluno *varTemp = *cadastroAluno;
 
-// int inserirPosiInformada(cadAluno *cadastroAluno, cadAluno registro, int posicao)
-// {
-// }
-
-// FUNÇÃO PARA INSERIR EM UM LOCAL ESPECIFICADO //
-
-// IMPLEMENTAÇÃO DE ESCOLHAS DO USUÁRIO //
+    if ((varTemp + posicao)->idRegistro == 0)
+    {
+        printf("Não há nenhum registro nessa posição.\n");
+        return 0;
+    }
+    else
+    {
+        (varTemp + posicao)->idRegistro = 0;
+        free((varTemp + posicao)->aluno);
+        (varTemp + posicao)->aluno = NULL;
+        tamAtualVet--;
+        return 1;
+    }
+}
