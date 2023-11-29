@@ -23,8 +23,8 @@ void menu()
         puts("[1] - Inserir Aluno no Inicio");
         puts("[2] - Inserir Aluno no fim");
         puts("[3] - Inserir dados em um local especifico");
-        puts("[4] - Deletar registro");
-        puts("[5] - Cadastrar Aluno");
+        puts("[4] - Dedeletar posição");
+        puts("[5] - Deletar registro");
         puts("[6] - Cadastrar Aluno");
         puts("[7] - Cadastrar Aluno");
         puts("[8] - Deseja Sair?");
@@ -130,6 +130,10 @@ void menu()
                 {
                     deletarPosicoes(&vetGeral, escolhaUsuario);
                 }
+            case 5:
+                printf("Insirida um numero identificador");
+                scanf("%d", &escolhaUsuario);
+                apagarRegistro(&vetGeral, escolhaUsuario);
 
             case 8:
                 puts("Saindo!.......\n");
