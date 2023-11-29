@@ -23,8 +23,7 @@ void vetEndHeapAlunos(cadAluno **vetGeral);
 void aumentarMemoria(cadAluno **cadastroAluno);
 int moverDireitaEinserir ( cadAluno **cadastroAluno, cadAluno registro);
 int moverFimEinserir ( cadAluno **cadastroAluno, cadAluno registro);
-int moverLugarEscolhido (cadAluno **cadastroAluno, cadAluno registro, int posicao);
-int deletarPosicoes ( cadAluno **cadastroAluno, int posicao);
+int removerPosicao(int posicao, cadAluno **cadastroAluno);
 
 
 
@@ -32,3 +31,4 @@ int deletarPosicoes ( cadAluno **cadastroAluno, int posicao);
 int inserirInicio(cadAluno **cadastroAluno, cadAluno registro);
 int inserirFim(cadAluno **cadastroAluno, cadAluno registro);
 int inserirPosiInformada (cadAluno **cadastroAluno, cadAluno registro, int posicao);
+int moverLugarEscolhido (cadAluno **cadastroAluno, cadAluno registro, int posicao);
