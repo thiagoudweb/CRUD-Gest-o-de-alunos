@@ -23,7 +23,7 @@ void menu()
         puts("[1] - Inserir Aluno no Inicio");
         puts("[2] - Inserir Aluno no fim");
         puts("[3] - Inserir dados em um local especifico");
-        puts("[4] - Cadastrar Aluno");
+        puts("[4] - Deletar registro");
         puts("[5] - Cadastrar Aluno");
         puts("[6] - Cadastrar Aluno");
         puts("[7] - Cadastrar Aluno");
@@ -117,6 +117,19 @@ void menu()
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirPosiInformada(&vetGeral, cadastroAluno, escolhaUsuario);
                 continue;
+
+            case 4:
+                printf("DIGITE A POSIÇÃO QUE VOCÊ DESEJA REMOVER \n");
+                scanf("%d", &escolhaUsuario);
+                if (escolhaUsuario > tamAtualVet)
+                {
+                    printf("Não existe bloco alocado nessa posição informada. \n");
+                    continue;
+                }
+                else
+                {
+                    deletarPosicoes(&vetGeral, escolhaUsuario);
+                }
 
             case 8:
                 puts("Saindo!.......\n");
