@@ -133,7 +133,24 @@ void menu()
 
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirPosiInformada(&vetGeral, cadastroAluno, escolhaUsuario);
-                break;
+                continue;
+
+            case 4:
+                printf("DIGITE A POSIÇÃO QUE VOCÊ DESEJA REMOVER \n");
+                scanf("%d", &escolhaUsuario);
+                if (escolhaUsuario > tamAtualVet)
+                {
+                    printf("Não existe bloco alocado nessa posição informada. \n");
+                    continue;
+                }
+                else
+                {
+                    deletarPosicoes(&vetGeral, escolhaUsuario);
+                }
+            case 5:
+                printf("Insirida um numero identificador");
+                scanf("%d", &escolhaUsuario);
+                apagarRegistro(&vetGeral, escolhaUsuario);
 
             case 8:
                 puts("Saindo!.......\n");
@@ -361,11 +378,47 @@ int moverLugarEscolhido(cadAluno **cadastroAluno, cadAluno registro, int posicao
         return 1;
     }
 }
+// remover de um lugar especifico //
+int removerPosicao(int posicao, cadAluno **cadastroAluno)
+{
+    cadAluno *varTemp = *cadastroAluno;
 
-// int inserirPosiInformada(cadAluno *cadastroAluno, cadAluno registro, int posicao)
-// {
-// }
+    if ((varTemp + posicao)->idRegistro == 0)
+    {
+        printf("Não há nenhum registro nessa posição.\n");
+        return 0;
+    }
+    else
+    {
+        (varTemp + posicao)->idRegistro = 0;
+        free((varTemp + posicao)->aluno);
+        (varTemp + posicao)->aluno = NULL;
+        tamAtualVet--;
+        return 1;
+    }
+}
 
-// FUNÇÃO PARA INSERIR EM UM LOCAL ESPECIFICADO //
+// remover aluno por id ( identificador inicial do bloco do vetor ) //
+int removerRegistro(int id, cadAluno **cadastroAluno)
+{
+    cadAluno *varTemp = *cadastroAluno;
 
-// IMPLEMENTAÇÃO DE ESCOLHAS DO USUÁRIO //
+    for (int i = 0; i < tamAtualVet; i++)
+    {
+        if ((varTemp + i)->idRegistro == id)
+        {
+            for (int j = i; j < tamAtualVet - 1; j++)
+            {
+                (varTemp + j)->idRegistro = (varTemp + j + 1)->idRegistro;
+                (varTemp + j)->aluno = (varTemp + j + 1)->aluno;
+            }
+            (varTemp + tamAtualVet - 1)->idRegistro = 0;
+            free((varTemp + tamAtualVet - 1)->aluno);
+            (varTemp + tamAtualVet - 1)->aluno = NULL;
+            tamAtualVet--;
+            return 1;
+        }
+    }
+
+    return 0;
+}
