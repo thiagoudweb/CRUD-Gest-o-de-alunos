@@ -7,11 +7,13 @@
 int tamInicial = 10;
 int tamFixo = 10;
 int tamAtualVet = 0;
+
 void menu()
 {
     cadAluno *vetGeral;
     vetEndHeapAlunos(&vetGeral);
     cadAluno cadastroAluno;
+    int escolhaUsuario;
 
     int bool = 1;
     while (bool == 1)
@@ -20,7 +22,7 @@ void menu()
         puts("----------------- CADASTRAR ALUNO ----------------");
         puts("[1] - Inserir Aluno no Inicio");
         puts("[2] - Inserir Aluno no fim");
-        puts("[3] - Cadastrar Aluno");
+        puts("[3] - Inserir dados em um local especifico");
         puts("[4] - Cadastrar Aluno");
         puts("[5] - Cadastrar Aluno");
         puts("[6] - Cadastrar Aluno");
@@ -89,6 +91,33 @@ void menu()
                 inserirFim(&vetGeral, cadastroAluno);
                 continue;
 
+            case 3:
+
+                printf("DIGITE A POSIÇÃO QUE VOCÊ QUER INSERIR O REGISTRO\n");
+                scanf("%d", &escolhaUsuario);
+                printf("Iinsira o ID de registro do aluno:");
+                scanf("%d", &cadastroAluno.idRegistro);
+                returnEndHeapAluno(&cadastroAluno.aluno);
+                printf("Digite o nome do  aluno:");
+                scanf("%s", &cadastroAluno.aluno->nomeAluno);
+                printf("Digite 7 notas do aluno:");
+                for (int i = 0; i < 7; i++)
+                {
+                    scanf("%d", &cadastroAluno.aluno->notas[i]);
+                }
+
+                printf("Digite a matricula do aluno:");
+                scanf("%d", &cadastroAluno.aluno->matricula);
+                printf("Digite as 7 faltas do aluno:");
+                for (int i = 0; i < 7; i++)
+                {
+                    scanf("%d", &cadastroAluno.aluno->faltas[i]);
+                }
+
+                //                 ESCREVENDO DADOS NA HEAP                 //
+                inserirPosiInformada(&vetGeral, cadastroAluno, escolhaUsuario);
+                continue;
+
             case 8:
                 puts("Saindo!.......\n");
                 bool = 0;
@@ -154,8 +183,6 @@ int inserirInicio(cadAluno **cadastroAluno, cadAluno registro)
     {
         moverDireitaEinserir(cadastroAluno, registro);
     }
-
-    return 0;
 }
 
 // -----        inserir no fim ------- //
@@ -172,8 +199,23 @@ int inserirFim(cadAluno **cadastroAluno, cadAluno registro)
     {
         moverFimEinserir(cadastroAluno, registro);
     }
+}
 
-    return 0;
+// ----- inserir em um local especifico  ------ //
+int inserirPosiInformada(cadAluno **cadastroAluno, cadAluno registro, int posicao)
+{
+
+    if (tamAtualVet == tamInicial)
+    {
+
+        aumentarMemoria(cadastroAluno);
+        moverLugarEscolhido(cadastroAluno, registro, posicao);
+    }
+
+    else
+    {
+        moverLugarEscolhido(cadastroAluno, registro, posicao);
+    }
 }
 
 //  FUNÇÃO PARA AUMENTAR MEMÓRIA //
@@ -192,7 +234,7 @@ void aumentarMemoria(cadAluno **cadastroAluno)
     }
 }
 
-// FUNÇÃO PARA  MOVER OS DADOS PARA A DIREITA
+// FUNÇÕES PARA INSERIR CADASTROS DA LISTA //
 
 // ---- mover direita inicio  //
 int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
@@ -221,7 +263,7 @@ int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
     }
 }
 
-// FUNÇÃO PARA INSERIR NO FIM //
+// inserir no fim da lista //
 
 int moverFimEinserir(cadAluno **cadastroAluno, cadAluno registro)
 {
@@ -248,12 +290,44 @@ int moverFimEinserir(cadAluno **cadastroAluno, cadAluno registro)
     }
     else
     {
-        (endComp + (tamAtualVet + 1))->idRegistro = registro.idRegistro;
-        (endComp + (tamAtualVet + 1))->aluno = registro.aluno;
+        (endComp + tamAtualVet)->idRegistro = registro.idRegistro;
+        (endComp + tamAtualVet)->aluno = registro.aluno;
         printf("Cadastro realizado com sucesso!");
         tamAtualVet++;
         return 1;
     }
 }
+
+// inserir em um lugar especifico //
+
+int moverLugarEscolhido(cadAluno **cadastroAluno, cadAluno registro, int posicao)
+{
+    cadAluno *varTemp = *cadastroAluno;
+
+    if ((varTemp + posicao)->idRegistro == 0)
+    {
+        (varTemp + posicao)->idRegistro = registro.idRegistro;
+        (varTemp + posicao)->aluno = registro.aluno;
+        printf("Cadastro realizado com sucesso!");
+        tamAtualVet++;
+        return 1;
+    }
+    else
+    {
+
+        memmove(varTemp + posicao + 1, varTemp + posicao, (tamAtualVet - posicao) * sizeof(cadAluno));
+        (varTemp + posicao)->idRegistro = registro.idRegistro;
+        (varTemp + posicao)->aluno = registro.aluno;
+        printf("Cadastro realizado com sucesso!");
+        tamAtualVet++;
+        return 1;
+    }
+}
+
+// int inserirPosiInformada(cadAluno *cadastroAluno, cadAluno registro, int posicao)
+// {
+// }
+
+// FUNÇÃO PARA INSERIR EM UM LOCAL ESPECIFICADO //
 
 // IMPLEMENTAÇÃO DE ESCOLHAS DO USUÁRIO //

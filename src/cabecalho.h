@@ -30,4 +30,4 @@ int moverLugarEscolhido (cadAluno **cadastroAluno, cadAluno registro, int posica
 // ASSINATURA DE FUNÇÕES: INSERÇÃO DE REGISTRO NAS POSIÇÕES ESCOLHIDAS PELO USUÁRIO //
 int inserirInicio(cadAluno **cadastroAluno, cadAluno registro);
 int inserirFim(cadAluno **cadastroAluno, cadAluno registro);
-int inserirPosiInformada (cadAluno *cadastroAluno, cadAluno registro, int posicao);
+int inserirPosiInformada (cadAluno **cadastroAluno, cadAluno registro, int posicao);
