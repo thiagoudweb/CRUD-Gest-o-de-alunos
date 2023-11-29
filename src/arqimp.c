@@ -34,6 +34,7 @@ void menu()
         scanf("%d", &escolha);
 
         if (escolha == 8) {
+            puts("Saindo!.......\n");
             break;
         }
 
@@ -133,10 +134,6 @@ void menu()
 
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirPosiInformada(&vetGeral, cadastroAluno, escolhaUsuario);
-                break;
-
-            case 8:
-                puts("Saindo!.......\n");
                 break;
             }
         }
@@ -259,7 +256,7 @@ int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
         (endComp + 0)->idRegistro = registro.idRegistro;
         (endComp + 0)->aluno = registro.aluno;
 
-        salvarDados(endComp, "a");
+        salvarDados(endComp, "w", tamAtualVet);
 
         printf("Cadastro realizado com sucesso!\n");
 
@@ -268,13 +265,12 @@ int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
     }
     else
     {
-
-        memmove(endComp + 1, endComp, tamAtualVet * sizeof(cadAluno));
+        memmove((endComp + 1), endComp, tamAtualVet * sizeof(cadAluno));
 
         (endComp + 0)->idRegistro = registro.idRegistro;
         (endComp + 0)->aluno = registro.aluno;
 
-        salvarDados(endComp, "a");
+        salvarDados(endComp, "w", tamAtualVet);
 
         printf("Cadastro realizado com sucesso!\n");
 
@@ -306,7 +302,7 @@ int moverFimEinserir(cadAluno **cadastroAluno, cadAluno registro)
             (endComp + 0)->idRegistro = registro.idRegistro;
             (endComp + 0)->aluno = registro.aluno;
 
-            salvarDados(endComp, "a");
+            salvarDados(endComp, "a", tamAtualVet);
 
             printf("Cadastro realizado com sucesso!\n");
 
@@ -319,7 +315,7 @@ int moverFimEinserir(cadAluno **cadastroAluno, cadAluno registro)
         (endComp + tamAtualVet)->idRegistro = registro.idRegistro;
         (endComp + tamAtualVet)->aluno = registro.aluno;
 
-        salvarDados(endComp, "a");
+        salvarDados(endComp, "a", tamAtualVet);
 
         printf("Cadastro realizado com sucesso!\n");
 
@@ -339,7 +335,7 @@ int moverLugarEscolhido(cadAluno **cadastroAluno, cadAluno registro, int posicao
         (varTemp + posicao)->idRegistro = registro.idRegistro;
         (varTemp + posicao)->aluno = registro.aluno;
 
-        salvarDados(varTemp, "a");
+        salvarDados(varTemp, "a", tamAtualVet);
 
         printf("Cadastro realizado com sucesso!");
 
@@ -353,7 +349,7 @@ int moverLugarEscolhido(cadAluno **cadastroAluno, cadAluno registro, int posicao
         (varTemp + posicao)->idRegistro = registro.idRegistro;
         (varTemp + posicao)->aluno = registro.aluno;
 
-        salvarDados(varTemp, "a");
+        salvarDados(varTemp, "a", tamAtualVet);
 
         printf("Cadastro realizado com sucesso!\n");
 
