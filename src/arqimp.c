@@ -25,8 +25,8 @@ void menu()
         puts("[3] - Inserir dados em um local especifico");
         puts("[4] - Dedeletar posição");
         puts("[5] - Deletar registro");
-        puts("[6] - Cadastrar Aluno");
-        puts("[7] - Cadastrar Aluno");
+        puts("[6] - ------");
+        puts("[7] - ------");
         puts("[8] - Deseja Sair?");
 
         int escolha;
