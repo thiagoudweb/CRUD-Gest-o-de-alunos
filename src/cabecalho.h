@@ -34,3 +34,13 @@ int inserirFim(cadAluno **cadastroAluno, cadAluno registro);
 int inserirPosiInformada (cadAluno **cadastroAluno, cadAluno registro, int posicao);
 int moverLugarEscolhido (cadAluno **cadastroAluno, cadAluno registro, int posicao);
 int apagarRegistro ( cadAluno **cadastroAluno, int posicao);
+
+// FUNÇÕES DO MAIN //
+
+void inserirInicioMain(cadAluno ** vetGeral);
+void inserirFimMain(cadAluno ** vetGeral);
+void inserirLocalEscolhidoMain(cadAluno **vetGeral);
+void moverLugarEscolhidoMain();
+void apagarRegistroMain();
+void telaMenu();
+void criarVetorInicial();
