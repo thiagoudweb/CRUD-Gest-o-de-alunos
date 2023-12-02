@@ -1,4 +1,5 @@
 #include "cabecalho.h"
+#include "arquivo.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,11 +13,11 @@ void menu()
 {
     cadAluno *vetGeral;
     vetEndHeapAlunos(&vetGeral);
+
     cadAluno cadastroAluno;
     int escolhaUsuario;
 
-    int bool = 1;
-    while (bool == 1)
+    while (1)
     {
         int tam = lerDados(vetGeral);
         tamAtualVet = tam;
@@ -25,10 +26,10 @@ void menu()
         puts("[1] - Inserir Aluno no Inicio");
         puts("[2] - Inserir Aluno no fim");
         puts("[3] - Inserir dados em um local especifico");
-        puts("[4] - Dedeletar posição");
+        puts("[4] - Deletar posição");
         puts("[5] - Deletar registro");
         puts("[6] - ------");
-        puts("[7] - ------");
+        puts("[7] - Apresentar Dados");
         puts("[8] - Deseja Sair?");
 
         int escolha;
@@ -37,19 +38,25 @@ void menu()
         if (escolha < 1 || escolha > 8)
         {
             puts("Escolha uma opção válida!\n");
-            continue;
+        }
+        else if (escolha == 8)
+        {
+            puts("Saindo!.......\n");
+            break;
         }
         else
         {
             switch (escolha)
             {
             case 1:
-
                 printf("Iinsira o ID de registro do aluno:\n");
                 scanf("%d", &cadastroAluno.idRegistro);
+
                 returnEndHeapAluno(&cadastroAluno.aluno);
+
                 printf("Digite o nome do  aluno:\n");
                 scanf("%s", &cadastroAluno.aluno->nomeAluno);
+
                 printf("Digite 7 notas do aluno:\n");
                 for (int i = 0; i < 7; i++)
                 {
@@ -58,6 +65,7 @@ void menu()
 
                 printf("Digite a matricula do aluno:\n");
                 scanf("%d", &cadastroAluno.aluno->matricula);
+
                 printf("Digite as 7 faltas do aluno:\n");
                 for (int i = 0; i < 7; i++)
                 {
@@ -66,15 +74,17 @@ void menu()
 
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirInicio(&vetGeral, cadastroAluno);
-                continue;
+                break;
 
             case 2:
-
                 printf("Iinsira o ID de registro do aluno:\n");
                 scanf("%d", &cadastroAluno.idRegistro);
+
                 returnEndHeapAluno(&cadastroAluno.aluno);
+
                 printf("Digite o nome do  aluno:\n");
                 scanf("%s", &cadastroAluno.aluno->nomeAluno);
+
                 printf("Digite 7 notas do aluno:\n");
                 for (int i = 0; i < 7; i++)
                 {
@@ -83,6 +93,7 @@ void menu()
 
                 printf("Digite a matricula do aluno:\n");
                 scanf("%d", &cadastroAluno.aluno->matricula);
+
                 printf("Digite as 7 faltas do aluno:\n");
                 for (int i = 0; i < 7; i++)
                 {
@@ -91,17 +102,20 @@ void menu()
 
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirFim(&vetGeral, cadastroAluno);
-                continue;
+                break;
 
             case 3:
-
                 printf("DIGITE A POSIÇÃO QUE VOCÊ QUER INSERIR O REGISTRO\n");
                 scanf("%d", &escolhaUsuario);
+
                 printf("Iinsira o ID de registro do aluno:\n");
                 scanf("%d", &cadastroAluno.idRegistro);
+
                 returnEndHeapAluno(&cadastroAluno.aluno);
+
                 printf("Digite o nome do  aluno:\n");
                 scanf("%s", &cadastroAluno.aluno->nomeAluno);
+
                 printf("Digite 7 notas do aluno:\n");
                 for (int i = 0; i < 7; i++)
                 {
@@ -110,6 +124,7 @@ void menu()
 
                 printf("Digite a matricula do aluno:\n");
                 scanf("%d", &cadastroAluno.aluno->matricula);
+
                 printf("Digite as 7 faltas do aluno:\n");
                 for (int i = 0; i < 7; i++)
                 {
@@ -118,34 +133,32 @@ void menu()
 
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirPosiInformada(&vetGeral, cadastroAluno, escolhaUsuario);
-                continue;
+                break;
 
             case 4:
                 printf("DIGITE A POSIÇÃO QUE VOCÊ DESEJA REMOVER \n");
                 scanf("%d", &escolhaUsuario);
+
                 if (escolhaUsuario > tamAtualVet)
                 {
                     printf("Não existe bloco alocado nessa posição informada. \n");
-                    continue;
                 }
                 else
                 {
                     deletarPosicoes(&vetGeral, escolhaUsuario);
                 }
+
             case 5:
                 printf("Insirida um numero identificador");
                 scanf("%d", &escolhaUsuario);
+
                 apagarRegistro(&vetGeral, escolhaUsuario);
-                continue;
+                break;
 
             case 7:
                 int tam = lerDados(vetGeral);
                 imprimirDados(vetGeral, tam);
                 break;
-
-            case 8:
-                puts("Saindo!.......\n");
-                bool = 0;
             }
         }
     }
@@ -161,7 +174,6 @@ void vetEndHeapAlunos(cadAluno **vetGeral)
     {
         printf("O ponteiro vetGeral é inválido.\n");
     }
-
     else
     {
         // alocando espaço na heap e atribuindo a *vetGeral no menu > tipagem integrada no *vetGeral no menu.
@@ -182,6 +194,7 @@ void vetEndHeapAlunos(cadAluno **vetGeral)
 void returnEndHeapAluno(aluno **vetAlunos)
 {
     void *endTemp = calloc(1, sizeof(aluno));
+
     if (endTemp == NULL)
     {
         printf("A alocação de alunos falho!\n");
@@ -203,7 +216,6 @@ int inserirInicio(cadAluno **cadastroAluno, cadAluno registro)
         aumentarMemoria(cadastroAluno);
         moverDireitaEinserir(cadastroAluno, registro);
     }
-
     else
     {
         moverDireitaEinserir(cadastroAluno, registro);
@@ -213,13 +225,11 @@ int inserirInicio(cadAluno **cadastroAluno, cadAluno registro)
 // -----        inserir no fim ------- //
 int inserirFim(cadAluno **cadastroAluno, cadAluno registro)
 {
-
     if (tamAtualVet == tamInicial)
     {
         aumentarMemoria(cadastroAluno);
         moverFimEinserir(cadastroAluno, registro);
     }
-
     else
     {
         moverFimEinserir(cadastroAluno, registro);
@@ -229,39 +239,32 @@ int inserirFim(cadAluno **cadastroAluno, cadAluno registro)
 // ----- inserir em um local especifico  ------ //
 int inserirPosiInformada(cadAluno **cadastroAluno, cadAluno registro, int posicao)
 {
-
     if (tamAtualVet == tamInicial)
     {
-
         aumentarMemoria(cadastroAluno);
         moverLugarEscolhido(cadastroAluno, registro, posicao);
     }
-
     else
     {
         moverLugarEscolhido(cadastroAluno, registro, posicao);
     }
 }
-// ----- Deleltar posição  ------ //
 
+// ----- Deleltar posição  ------ //
 int deletarPosicoes(cadAluno **cadastroAluno, int posicao)
 {
-
-    removerPosicao(cadastroAluno, posicao);
+    removerPosicao(posicao, cadastroAluno);
 }
 
 // ----- deletar registro, mas mantendo o espaço ---- //
-
 int apagarRegistro(cadAluno **cadastroAluno, int posicao)
 {
-
     removerRegistro(posicao, cadastroAluno);
 }
 
 //  FUNÇÃO PARA AUMENTAR MEMÓRIA //
 void aumentarMemoria(cadAluno **cadastroAluno)
 {
-
     void *endTem = realloc(*cadastroAluno, tamFixo * sizeof(cadAluno));
     if (endTem == NULL)
     {
@@ -275,15 +278,13 @@ void aumentarMemoria(cadAluno **cadastroAluno)
 }
 
 // FUNÇÕES PARA INSERIR CADASTROS DA LISTA //
-
 // ---- mover direita inicio  //
 int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
 {
-
     cadAluno *endComp = *cadastroAluno;
+
     if ((endComp + 0)->idRegistro == 0)
     {
-
         (endComp + 0)->idRegistro = registro.idRegistro;
         (endComp + 0)->aluno = registro.aluno;
 
@@ -295,7 +296,6 @@ int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
     }
     else
     {
-
         memmove(endComp + 1, endComp, tamAtualVet * sizeof(cadAluno));
 
         (endComp + 0)->idRegistro = registro.idRegistro;
@@ -305,12 +305,12 @@ int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
 
         printf("Cadastro realizado com sucesso!\n");
         tamAtualVet++;
+
         return 1;
     }
 }
 
 // inserir no fim da lista //
-
 int moverFimEinserir(cadAluno **cadastroAluno, cadAluno registro)
 {
     int escolhaUser;
@@ -351,7 +351,6 @@ int moverFimEinserir(cadAluno **cadastroAluno, cadAluno registro)
 }
 
 // inserir em um lugar especifico //
-
 int moverLugarEscolhido(cadAluno **cadastroAluno, cadAluno registro, int posicao)
 {
     cadAluno *varTemp = *cadastroAluno;
@@ -361,7 +360,7 @@ int moverLugarEscolhido(cadAluno **cadastroAluno, cadAluno registro, int posicao
         (varTemp + posicao)->idRegistro = registro.idRegistro;
         (varTemp + posicao)->aluno = registro.aluno;
 
-        salvarDados(varTemp, "a", tamAtualVet);
+        salvarDados(varTemp, "w", tamAtualVet);
 
         printf("Cadastro realizado com sucesso!\n");
         tamAtualVet++;
@@ -369,18 +368,18 @@ int moverLugarEscolhido(cadAluno **cadastroAluno, cadAluno registro, int posicao
     }
     else
     {
-
         memmove(varTemp + posicao + 1, varTemp + posicao, (tamAtualVet - posicao) * sizeof(cadAluno));
         (varTemp + posicao)->idRegistro = registro.idRegistro;
         (varTemp + posicao)->aluno = registro.aluno;
 
-        salvarDados(varTemp, "a", tamAtualVet);
+        salvarDados(varTemp, "w", tamAtualVet);
 
         printf("Cadastro realizado com sucesso!\n");
         tamAtualVet++;
         return 1;
     }
 }
+
 // remover de um lugar especifico //
 int removerPosicao(int posicao, cadAluno **cadastroAluno)
 {
@@ -397,7 +396,7 @@ int removerPosicao(int posicao, cadAluno **cadastroAluno)
         free((varTemp + posicao)->aluno);
         (varTemp + posicao)->aluno = NULL;
 
-        salvarDados(varTemp, "a", tamAtualVet);
+        salvarDados(varTemp, "w", tamAtualVet);
 
         tamAtualVet--;
         return 1;
@@ -422,7 +421,7 @@ int removerRegistro(int id, cadAluno **cadastroAluno)
             free((varTemp + tamAtualVet - 1)->aluno);
             (varTemp + tamAtualVet - 1)->aluno = NULL;
 
-            salvarDados(varTemp, "a", tamAtualVet);
+            salvarDados(varTemp, "w", tamAtualVet);
 
             printf("Registro removido com sucesso!");
             tamAtualVet--;
