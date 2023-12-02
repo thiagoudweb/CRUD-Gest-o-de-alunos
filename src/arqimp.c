@@ -60,7 +60,7 @@ void menu()
                 printf("Digite 7 notas do aluno:\n");
                 for (int i = 0; i < 7; i++)
                 {
-                    scanf("%d", &cadastroAluno.aluno->notas[i]);
+                    scanf("%f", &cadastroAluno.aluno->notas[i]);
                 }
 
                 printf("Digite a matricula do aluno:\n");
@@ -88,7 +88,7 @@ void menu()
                 printf("Digite 7 notas do aluno:\n");
                 for (int i = 0; i < 7; i++)
                 {
-                    scanf("%d", &cadastroAluno.aluno->notas[i]);
+                    scanf("%f", &cadastroAluno.aluno->notas[i]);
                 }
 
                 printf("Digite a matricula do aluno:\n");
@@ -119,7 +119,7 @@ void menu()
                 printf("Digite 7 notas do aluno:\n");
                 for (int i = 0; i < 7; i++)
                 {
-                    scanf("%d", &cadastroAluno.aluno->notas[i]);
+                    scanf("%f", &cadastroAluno.aluno->notas[i]);
                 }
 
                 printf("Digite a matricula do aluno:\n");
