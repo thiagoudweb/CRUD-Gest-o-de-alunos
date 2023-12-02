@@ -8,8 +8,8 @@ int main()
     
     int entradaUsuario;
     int bool = 1;
-    cadAluno *vetGeral = vetEndHeapAlunos(&vetGeral);
-    
+    cadAluno *vetGeral;
+    vetEndHeapAlunos(&vetGeral);
 
     while (bool = 1)
     {
@@ -23,7 +23,32 @@ int main()
             continue;
         
         case 2:
-        continue;
+            inserirFimMain(&vetGeral);
+            continue;
+        
+        case 3:
+            inserirLocalEscolhidoMain(&vetGeral);
+            continue;
+        
+        case 4:
+            moverLugarEscolhidoMain(&vetGeral);
+            continue;
+       
+        case 5: 
+            apagarRegistroMain(&vetGeral);
+
+
+        //.....
+        
+        
+        
+        
+        
+        case 8:
+            printf("Saindo....\n");
+            bool = 0;
+
+
         }
     }
     

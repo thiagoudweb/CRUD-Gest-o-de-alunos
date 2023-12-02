@@ -28,7 +28,7 @@ void telaMenu()
 
 // FUNÇÕES DE CHAMADA NO MAIN //
 
-// --- InserirINicio //
+//[1]InserirINicio //
 void inserirInicioMain(cadAluno **vetGeral)
 {
     printf("Iinsira o ID de registro do aluno:\n");
@@ -54,7 +54,7 @@ void inserirInicioMain(cadAluno **vetGeral)
     inserirInicio(vetGeral, cadastroAluno);
 }
 
-// --- inserir no Fim --- /
+//[2]inserir no Fim --- /
 
 void inserirFimMain(cadAluno **vetGeral)
 {
@@ -81,7 +81,7 @@ void inserirFimMain(cadAluno **vetGeral)
     inserirFim(vetGeral, cadastroAluno);
 }
 
-// --- inserirLocalEspecifico --- //
+// [3]inserirLocalEspecifico --- //
 
 void inserirLocalEscolhidoMain(cadAluno **vetGeral)
 {
@@ -108,6 +108,31 @@ void inserirLocalEscolhidoMain(cadAluno **vetGeral)
 
     //                 ESCREVENDO DADOS NA HEAP                 //
     inserirPosiInformada(vetGeral, cadastroAluno, escolhaUsuario);
+}
+
+// [4]mover registro para direita --- /
+void moverLugarEscolhidoMain(cadAluno **vetGeral)
+{
+
+    printf("DIGITE A POSIÇÃO QUE VOCÊ DESEJA REMOVER \n");
+    scanf("%d", &escolhaUsuario);
+    if (escolhaUsuario > tamAtualVet)
+    {
+        printf("Não existe bloco alocado nessa posição informada. \n");
+    }
+    else
+    {
+        deletarPosicoes(vetGeral, escolhaUsuario);
+    }
+}
+
+// [5]deletar registro --- //
+void apagarRegistroMain(cadAluno **vetGeral)
+{
+    printf("Insirida um numero identificador");
+    scanf("%d", &escolhaUsuario);
+    apagarRegistro(vetGeral, escolhaUsuario);
+    
 }
 
 //----------- FUNÇÕES DE ALOCAÇÃO ---------//
