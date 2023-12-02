@@ -15,7 +15,6 @@ void menu()
     vetEndHeapAlunos(&vetGeral);
 
     cadAluno cadastroAluno;
-    int escolhaUsuario;
 
     while (1)
     {
@@ -106,6 +105,8 @@ void menu()
 
             case 3:
                 printf("DIGITE A POSIÇÃO QUE VOCÊ QUER INSERIR O REGISTRO\n");
+                
+                int escolhaUsuario;
                 scanf("%d", &escolhaUsuario);
 
                 printf("Iinsira o ID de registro do aluno:\n");
@@ -147,6 +148,7 @@ void menu()
                 {
                     deletarPosicoes(&vetGeral, escolhaUsuario);
                 }
+                break;
 
             case 5:
                 printf("Insirida um numero identificador");
@@ -291,7 +293,9 @@ int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
         salvarDados(endComp, "w", tamAtualVet);
 
         printf("Cadastro realizado com sucesso!\n");
+
         tamAtualVet++;
+
         return 1;
     }
     else
@@ -304,6 +308,7 @@ int moverDireitaEinserir(cadAluno **cadastroAluno, cadAluno registro)
         salvarDados(endComp, "w", tamAtualVet);
 
         printf("Cadastro realizado com sucesso!\n");
+
         tamAtualVet++;
 
         return 1;
@@ -315,14 +320,18 @@ int moverFimEinserir(cadAluno **cadastroAluno, cadAluno registro)
 {
     int escolhaUser;
     cadAluno *endComp = *cadastroAluno;
+
     if (tamAtualVet == 0)
     {
         printf("Você ainda não possui registros. Deseja alocar no inicio?\n");
+
         printf("Digite 1 para sim ou 2 para não\n");
         scanf("%d", &escolhaUser);
+
         if (escolhaUser == 2)
         {
             printf("Você optou por sair.\n");
+
             return 0;
         }
         else
@@ -333,7 +342,9 @@ int moverFimEinserir(cadAluno **cadastroAluno, cadAluno registro)
             salvarDados(endComp, "w", tamAtualVet);
 
             printf("Cadastro realizado com sucesso!\n");
+
             tamAtualVet++;
+
             return 1;
         }
     }
@@ -345,7 +356,9 @@ int moverFimEinserir(cadAluno **cadastroAluno, cadAluno registro)
         salvarDados(endComp, "w", tamAtualVet);
 
         printf("Cadastro realizado com sucesso!\n");
+
         tamAtualVet++;
+
         return 1;
     }
 }
@@ -363,19 +376,24 @@ int moverLugarEscolhido(cadAluno **cadastroAluno, cadAluno registro, int posicao
         salvarDados(varTemp, "w", tamAtualVet);
 
         printf("Cadastro realizado com sucesso!\n");
+
         tamAtualVet++;
+
         return 1;
     }
     else
     {
         memmove(varTemp + posicao + 1, varTemp + posicao, (tamAtualVet - posicao) * sizeof(cadAluno));
+
         (varTemp + posicao)->idRegistro = registro.idRegistro;
         (varTemp + posicao)->aluno = registro.aluno;
 
         salvarDados(varTemp, "w", tamAtualVet);
 
         printf("Cadastro realizado com sucesso!\n");
+
         tamAtualVet++;
+
         return 1;
     }
 }
@@ -393,12 +411,15 @@ int removerPosicao(int posicao, cadAluno **cadastroAluno)
     else
     {
         (varTemp + posicao)->idRegistro = 0;
+
         free((varTemp + posicao)->aluno);
+
         (varTemp + posicao)->aluno = NULL;
 
         salvarDados(varTemp, "w", tamAtualVet);
 
         tamAtualVet--;
+
         return 1;
     }
 }
@@ -417,14 +438,18 @@ int removerRegistro(int id, cadAluno **cadastroAluno)
                 (varTemp + j)->idRegistro = (varTemp + j + 1)->idRegistro;
                 (varTemp + j)->aluno = (varTemp + j + 1)->aluno;
             }
+
             (varTemp + tamAtualVet - 1)->idRegistro = 0;
+
             free((varTemp + tamAtualVet - 1)->aluno);
+
             (varTemp + tamAtualVet - 1)->aluno = NULL;
 
             salvarDados(varTemp, "w", tamAtualVet);
 
             printf("Registro removido com sucesso!");
             tamAtualVet--;
+
             return 1;
         }
     }
