@@ -1,3 +1,5 @@
-void salvarDados(cadAluno *alunos, const char *tipoArquivo);
+void salvarDados(cadAluno *alunos, const char *tipoArquivo, int tamanhoAtual);
 
-void lerDados();
+int lerDados(cadAluno *carregarAlunos);
+
+void imprimirDados(cadAluno *carregarAlunos, int tamanho);
