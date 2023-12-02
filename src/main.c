@@ -7,11 +7,11 @@ int main()
 {
     
     int entradaUsuario;
-    int bool = 1;
+    int booli = 1;
     cadAluno *vetGeral;
     vetEndHeapAlunos(&vetGeral);
 
-    while (bool = 1)
+    while (booli = 1)
     {
         telaMenu();
         scanf("%d", &entradaUsuario);
@@ -36,6 +36,7 @@ int main()
        
         case 5: 
             apagarRegistroMain(&vetGeral);
+            continue;
 
 
         //.....
@@ -46,7 +47,7 @@ int main()
         
         case 8:
             printf("Saindo....\n");
-            bool = 0;
+            booli = 0;
 
 
         }
