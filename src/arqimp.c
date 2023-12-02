@@ -20,8 +20,9 @@ void menu()
 
     while (1)
     {
-        lerDados(vetGeral);
-        
+        int tam = lerDados(vetGeral);
+        tamAtualVet = tam;
+
         puts("----------------- CADASTRAR ALUNO ----------------");
         puts("[1] - Inserir Aluno no Inicio");
         puts("[2] - Inserir Aluno no fim");
@@ -29,13 +30,14 @@ void menu()
         puts("[4] - Cadastrar Aluno");
         puts("[5] - Cadastrar Aluno");
         puts("[6] - Cadastrar Aluno");
-        puts("[7] - Cadastrar Aluno");
+        puts("[7] - Apresentar Dados");
         puts("[8] - Deseja Sair?");
 
         int escolha;
         scanf("%d", &escolha);
 
-        if (escolha == 8) {
+        if (escolha == 8)
+        {
             puts("Saindo!.......\n");
             break;
         }
@@ -76,7 +78,6 @@ void menu()
 
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirInicio(&vetGeral, cadastroAluno);
-                vetGeral->isVazio = 0;
                 break;
 
             case 2:
@@ -105,7 +106,6 @@ void menu()
 
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirFim(&vetGeral, cadastroAluno);
-                vetGeral->isVazio = 0;
                 break;
 
             case 3:
@@ -138,7 +138,11 @@ void menu()
 
                 //                 ESCREVENDO DADOS NA HEAP                 //
                 inserirPosiInformada(&vetGeral, cadastroAluno, escolhaUsuario);
-                vetGeral->isVazio = 0;
+                break;
+
+            case 7:
+                int tam = lerDados(vetGeral);
+                imprimirDados(vetGeral, tam);
                 break;
             }
         }
