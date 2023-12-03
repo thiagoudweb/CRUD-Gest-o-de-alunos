@@ -428,29 +428,68 @@ int moverLugarEscolhido(cadAluno **cadastroAluno, cadAluno registro, int posicao
 }
 
 // remover de um lugar especifico //
+// int removerPosicao(int posicao, cadAluno **cadastroAluno)
+// {
+//     cadAluno *varTemp = *cadastroAluno;
+
+//     if ((varTemp + posicao)->idRegistro == 0)
+//     {
+//         printf("Não há nenhum registro nessa posição.\n");
+//         return 0;
+//     }
+//     else
+//     {
+//         (varTemp + posicao)->idRegistro = 0;
+
+//         free((varTemp + posicao)->aluno);
+
+//         (varTemp + posicao)->aluno = NULL;
+
+//         tamAtualVet--;
+
+//         salvarDados(varTemp, "w", tamAtualVet);
+
+//         return 1;
+//     }
+// }
+
 int removerPosicao(int posicao, cadAluno **cadastroAluno)
 {
     cadAluno *varTemp = *cadastroAluno;
 
-    if ((varTemp + posicao)->idRegistro == 0)
+    int i;
+
+    if (posicao < 0 || posicao >= tamAtualVet)
+    {
+        printf("Posição inválida.\n");
+        return 0;
+    }
+
+    if (varTemp[posicao].idRegistro == 0)
     {
         printf("Não há nenhum registro nessa posição.\n");
         return 0;
     }
-    else
+
+    free(varTemp[posicao].aluno);
+
+    for (i = posicao; i < tamAtualVet - 1; i++)
     {
-        (varTemp + posicao)->idRegistro = 0;
-
-        free((varTemp + posicao)->aluno);
-
-        (varTemp + posicao)->aluno = NULL;
-
-        salvarDados(varTemp, "w", tamAtualVet);
-
-        tamAtualVet--;
-
-        return 1;
+        varTemp[i] = varTemp[i + 1];
     }
+
+    tamAtualVet--;
+    *cadastroAluno = realloc(varTemp, tamAtualVet * sizeof(cadAluno));
+
+    if (*cadastroAluno == NULL && tamAtualVet > 0)
+    {
+        printf("Erro ao realocar memória.\n");
+        return 0;
+    }
+
+    salvarDados(*cadastroAluno, "w", tamAtualVet);
+
+    return 1;
 }
 
 // remover aluno por id ( identificador inicial do bloco do vetor ) //
@@ -458,30 +497,36 @@ int removerRegistro(int id, cadAluno **cadastroAluno)
 {
     cadAluno *varTemp = *cadastroAluno;
 
-    for (int i = 0; i < tamAtualVet; i++)
+    int i;
+
+    for (i = 0; i < tamAtualVet; i++)
     {
-        if ((varTemp + i)->idRegistro == id)
+        if (varTemp[i].idRegistro == id)
         {
+            free(varTemp[i].aluno); // Liberar a memória do aluno a ser removido
+
             for (int j = i; j < tamAtualVet - 1; j++)
             {
-                (varTemp + j)->idRegistro = (varTemp + j + 1)->idRegistro;
-                (varTemp + j)->aluno = (varTemp + j + 1)->aluno;
+                varTemp[j] = varTemp[j + 1];
             }
 
-            (varTemp + tamAtualVet - 1)->idRegistro = 0;
-
-            free((varTemp + tamAtualVet - 1)->aluno);
-
-            (varTemp + tamAtualVet - 1)->aluno = NULL;
-
-            salvarDados(varTemp, "w", tamAtualVet);
-
-            printf("Registro removido com sucesso!");
             tamAtualVet--;
 
+            *cadastroAluno = realloc(varTemp, tamAtualVet * sizeof(cadAluno));
+
+            if (*cadastroAluno == NULL && tamAtualVet > 0)
+            {
+                printf("Erro ao realocar memória.\n");
+                return 0;
+            }
+
+            salvarDados(*cadastroAluno, "w", tamAtualVet);
+
+            printf("Registro removido com sucesso!\n");
             return 1;
         }
     }
 
+    printf("Registro com ID %d não encontrado.\n", id);
     return 0;
 }
