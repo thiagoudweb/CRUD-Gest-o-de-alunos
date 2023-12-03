@@ -22,6 +22,7 @@ void menu()
     puts("[6] - ------");
     puts("[7] - Apresentar Dados");
     puts("[8] - Deseja Sair?");
+    puts("--------------------------------------------------\n");
 }
 
 void novoRegistroInicio(cadAluno *vetGeral, cadAluno cadastroAluno)
