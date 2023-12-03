@@ -17,6 +17,8 @@ typedef struct
 // ASSINATURA DE FUNÇÕES: FUNÇÕES DO MAIN.
 void menu();
 
+void chamadaPrincipal();
+
 // ASSINATURA DE FUNÇÕES: ALOCAÇÃO NA MEMÓRIA HEAP - DINÂMICA - //
 void returnEndHeapAluno(aluno **vetAlunos);
 void vetEndHeapAlunos(cadAluno **vetGeral);

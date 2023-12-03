@@ -8,8 +8,130 @@
 int tamInicial = 10;
 int tamFixo = 10;
 int tamAtualVet = 0;
+int escolha;
+int escolhaUsuario;
 
 void menu()
+{
+    puts("----------------- CADASTRAR ALUNO ----------------");
+    puts("[1] - Inserir Aluno no Inicio");
+    puts("[2] - Inserir Aluno no fim");
+    puts("[3] - Inserir dados em um local especifico");
+    puts("[4] - Deletar posição");
+    puts("[5] - Deletar registro");
+    puts("[6] - ------");
+    puts("[7] - Apresentar Dados");
+    puts("[8] - Deseja Sair?");
+}
+
+void novoRegistroInicio(cadAluno *vetGeral, cadAluno cadastroAluno)
+{
+    printf("Iinsira o ID de registro do aluno:\n");
+    scanf("%d", &cadastroAluno.idRegistro);
+
+    returnEndHeapAluno(&cadastroAluno.aluno);
+
+    printf("Digite o nome do  aluno:\n");
+    scanf("%s", &cadastroAluno.aluno->nomeAluno);
+
+    printf("Digite 7 notas do aluno:\n");
+    for (int i = 0; i < 7; i++)
+    {
+        scanf("%f", &cadastroAluno.aluno->notas[i]);
+    }
+
+    printf("Digite a matricula do aluno:\n");
+    scanf("%d", &cadastroAluno.aluno->matricula);
+
+    printf("Digite as 7 faltas do aluno:\n");
+    for (int i = 0; i < 7; i++)
+    {
+        scanf("%d", &cadastroAluno.aluno->faltas[i]);
+    }
+
+    //                 ESCREVENDO DADOS NA HEAP                 //
+    inserirInicio(&vetGeral, cadastroAluno);
+}
+
+void novoRegistroFim(cadAluno *vetGeral, cadAluno cadastroAluno)
+{
+    printf("Iinsira o ID de registro do aluno:\n");
+    scanf("%d", &cadastroAluno.idRegistro);
+
+    returnEndHeapAluno(&cadastroAluno.aluno);
+
+    printf("Digite o nome do  aluno:\n");
+    scanf("%s", &cadastroAluno.aluno->nomeAluno);
+
+    printf("Digite 7 notas do aluno:\n");
+    for (int i = 0; i < 7; i++)
+    {
+        scanf("%f", &cadastroAluno.aluno->notas[i]);
+    }
+
+    printf("Digite a matricula do aluno:\n");
+    scanf("%d", &cadastroAluno.aluno->matricula);
+
+    printf("Digite as 7 faltas do aluno:\n");
+    for (int i = 0; i < 7; i++)
+    {
+        scanf("%d", &cadastroAluno.aluno->faltas[i]);
+    }
+
+    //                 ESCREVENDO DADOS NA HEAP                 //
+    inserirFim(&vetGeral, cadastroAluno);
+}
+
+void novoRegistroPosEspecifica(cadAluno *vetGeral, cadAluno cadastroAluno)
+{
+    printf("DIGITE A POSIÇÃO QUE VOCÊ QUER INSERIR O REGISTRO\n");
+
+    int escolhaUsuario;
+    scanf("%d", &escolhaUsuario);
+
+    printf("Iinsira o ID de registro do aluno:\n");
+    scanf("%d", &cadastroAluno.idRegistro);
+
+    returnEndHeapAluno(&cadastroAluno.aluno);
+
+    printf("Digite o nome do  aluno:\n");
+    scanf("%s", &cadastroAluno.aluno->nomeAluno);
+
+    printf("Digite 7 notas do aluno:\n");
+    for (int i = 0; i < 7; i++)
+    {
+        scanf("%f", &cadastroAluno.aluno->notas[i]);
+    }
+
+    printf("Digite a matricula do aluno:\n");
+    scanf("%d", &cadastroAluno.aluno->matricula);
+
+    printf("Digite as 7 faltas do aluno:\n");
+    for (int i = 0; i < 7; i++)
+    {
+        scanf("%d", &cadastroAluno.aluno->faltas[i]);
+    }
+
+    //                 ESCREVENDO DADOS NA HEAP                 //
+    inserirPosiInformada(&vetGeral, cadastroAluno, escolhaUsuario);
+}
+
+void apagarPosEspecifica(cadAluno *vetGeral, cadAluno cadastroAluno)
+{
+    printf("DIGITE A POSIÇÃO QUE VOCÊ DESEJA REMOVER \n");
+    scanf("%d", &escolhaUsuario);
+
+    if (escolhaUsuario > tamAtualVet)
+    {
+        printf("Não existe bloco alocado nessa posição informada. \n");
+    }
+    else
+    {
+        deletarPosicoes(&vetGeral, escolhaUsuario);
+    }
+}
+
+void chamadaPrincipal()
 {
     cadAluno *vetGeral;
     vetEndHeapAlunos(&vetGeral);
@@ -18,21 +140,47 @@ void menu()
 
     while (1)
     {
+        menu();
+
         int tam = lerDados(vetGeral);
         tamAtualVet = tam;
 
-        puts("----------------- CADASTRAR ALUNO ----------------");
-        puts("[1] - Inserir Aluno no Inicio");
-        puts("[2] - Inserir Aluno no fim");
-        puts("[3] - Inserir dados em um local especifico");
-        puts("[4] - Deletar posição");
-        puts("[5] - Deletar registro");
-        puts("[6] - ------");
-        puts("[7] - Apresentar Dados");
-        puts("[8] - Deseja Sair?");
-
-        int escolha;
         scanf("%d", &escolha);
+
+        switch (escolha)
+        {
+        case 1:
+            novoRegistroInicio(vetGeral, cadastroAluno);
+            break;
+
+        case 2:
+            novoRegistroFim(vetGeral, cadastroAluno);
+            break;
+
+        case 3:
+            novoRegistroPosEspecifica(vetGeral, cadastroAluno);
+            break;
+
+        case 4:
+            apagarPosEspecifica(vetGeral, cadastroAluno);
+            break;
+
+        case 5:
+            printf("Insirida o id do registro do aluno: ");
+            scanf("%d", &escolhaUsuario);
+
+            apagarRegistro(&vetGeral, escolhaUsuario);
+            break;
+
+        case 7:
+            int tam = lerDados(vetGeral);
+
+            puts("\n------------------------ APRESENTANDO DADOS ------------------------");
+            imprimirDados(vetGeral, tam);
+            puts("----------------------------------------------------------------------\n");
+
+            break;
+        }
 
         if (escolha < 1 || escolha > 8)
         {
@@ -42,126 +190,6 @@ void menu()
         {
             puts("Saindo!.......\n");
             break;
-        }
-        else
-        {
-            switch (escolha)
-            {
-            case 1:
-                printf("Iinsira o ID de registro do aluno:\n");
-                scanf("%d", &cadastroAluno.idRegistro);
-
-                returnEndHeapAluno(&cadastroAluno.aluno);
-
-                printf("Digite o nome do  aluno:\n");
-                scanf("%s", &cadastroAluno.aluno->nomeAluno);
-
-                printf("Digite 7 notas do aluno:\n");
-                for (int i = 0; i < 7; i++)
-                {
-                    scanf("%f", &cadastroAluno.aluno->notas[i]);
-                }
-
-                printf("Digite a matricula do aluno:\n");
-                scanf("%d", &cadastroAluno.aluno->matricula);
-
-                printf("Digite as 7 faltas do aluno:\n");
-                for (int i = 0; i < 7; i++)
-                {
-                    scanf("%d", &cadastroAluno.aluno->faltas[i]);
-                }
-
-                //                 ESCREVENDO DADOS NA HEAP                 //
-                inserirInicio(&vetGeral, cadastroAluno);
-                break;
-
-            case 2:
-                printf("Iinsira o ID de registro do aluno:\n");
-                scanf("%d", &cadastroAluno.idRegistro);
-
-                returnEndHeapAluno(&cadastroAluno.aluno);
-
-                printf("Digite o nome do  aluno:\n");
-                scanf("%s", &cadastroAluno.aluno->nomeAluno);
-
-                printf("Digite 7 notas do aluno:\n");
-                for (int i = 0; i < 7; i++)
-                {
-                    scanf("%f", &cadastroAluno.aluno->notas[i]);
-                }
-
-                printf("Digite a matricula do aluno:\n");
-                scanf("%d", &cadastroAluno.aluno->matricula);
-
-                printf("Digite as 7 faltas do aluno:\n");
-                for (int i = 0; i < 7; i++)
-                {
-                    scanf("%d", &cadastroAluno.aluno->faltas[i]);
-                }
-
-                //                 ESCREVENDO DADOS NA HEAP                 //
-                inserirFim(&vetGeral, cadastroAluno);
-                break;
-
-            case 3:
-                printf("DIGITE A POSIÇÃO QUE VOCÊ QUER INSERIR O REGISTRO\n");
-                
-                int escolhaUsuario;
-                scanf("%d", &escolhaUsuario);
-
-                printf("Iinsira o ID de registro do aluno:\n");
-                scanf("%d", &cadastroAluno.idRegistro);
-
-                returnEndHeapAluno(&cadastroAluno.aluno);
-
-                printf("Digite o nome do  aluno:\n");
-                scanf("%s", &cadastroAluno.aluno->nomeAluno);
-
-                printf("Digite 7 notas do aluno:\n");
-                for (int i = 0; i < 7; i++)
-                {
-                    scanf("%f", &cadastroAluno.aluno->notas[i]);
-                }
-
-                printf("Digite a matricula do aluno:\n");
-                scanf("%d", &cadastroAluno.aluno->matricula);
-
-                printf("Digite as 7 faltas do aluno:\n");
-                for (int i = 0; i < 7; i++)
-                {
-                    scanf("%d", &cadastroAluno.aluno->faltas[i]);
-                }
-
-                //                 ESCREVENDO DADOS NA HEAP                 //
-                inserirPosiInformada(&vetGeral, cadastroAluno, escolhaUsuario);
-                break;
-
-            case 4:
-                printf("DIGITE A POSIÇÃO QUE VOCÊ DESEJA REMOVER \n");
-                scanf("%d", &escolhaUsuario);
-
-                if (escolhaUsuario > tamAtualVet)
-                {
-                    printf("Não existe bloco alocado nessa posição informada. \n");
-                }
-                else
-                {
-                    deletarPosicoes(&vetGeral, escolhaUsuario);
-                }
-                break;
-
-            case 5:
-                printf("Insirida um numero identificador");
-                scanf("%d", &escolhaUsuario);
-
-                apagarRegistro(&vetGeral, escolhaUsuario);
-                break;
-
-            case 7:
-                int tam = lerDados(vetGeral);
-                imprimirDados(vetGeral, tam);
-                break;
-            }
         }
     }
 }

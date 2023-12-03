@@ -5,7 +5,7 @@
 
 int main()
 {
-    menu();
+    chamadaPrincipal();
 
     return 0;
 }
