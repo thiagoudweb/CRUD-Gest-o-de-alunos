@@ -154,11 +154,11 @@ void vetEndHeapAlunos(cadAluno **vetGeral)
         if (endTemp == NULL)
         {
             printf("Falha ao alocar a memória! Espaço insuficiente\n");
-            return -1;
+            
         }
         else
         {
-            return endTemp;
+            *vetGeral = endTemp;
         }
     }
 }
