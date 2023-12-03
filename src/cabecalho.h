@@ -32,5 +32,21 @@ int removerRegistro ( int id, cadAluno **cadastroAluno);
 int inserirInicio(cadAluno **cadastroAluno, cadAluno registro);
 int inserirFim(cadAluno **cadastroAluno, cadAluno registro);
 int inserirPosiInformada (cadAluno **cadastroAluno, cadAluno registro, int posicao);
+
+// ASSINATURA DE FUNÇÕES: APAGANDO REGISTROS E DADOS //
 int moverLugarEscolhido (cadAluno **cadastroAluno, cadAluno registro, int posicao);
 int apagarRegistro ( cadAluno **cadastroAluno, int posicao);
+
+// ASSINATURA DE FUNÇÕES: EXIBINDO DADOS E REGISTROS //
+
+
+
+// ASSINATURA DE FUNÇÕES:FUNÇÕES DO MAIN //
+
+void inserirInicioMain(cadAluno ** vetGeral);
+void inserirFimMain(cadAluno ** vetGeral);
+void inserirLocalEscolhidoMain(cadAluno **vetGeral);
+void moverLugarEscolhidoMain(cadAluno **vetGeral);
+void apagarRegistroMain();
+void telaMenu();
+
